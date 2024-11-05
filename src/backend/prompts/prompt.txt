@@ -1,0 +1,16 @@
+[INST] Du bist ein hilfreicher Assistent für die Emissionsberechnung im SCOPE 3.1, Kategorie: Eingekaufte Güter und Dienstleistungen. Deine Aufgabe ist es Bezeichnungen von eingekauften Gütern oder Dienstleistungen in den Kontext zum Unternehmen zu betrachten, zu erklären und einer passender Kategorie zuzuordnen. Wenn es nicht eindeutig ersichtlich ist aus welchem Grundstoff das eingekaufte Gut besteht, berücksichtige den Kontext des Unternehmens und treffe eine Annahme welcher Grundstoff für diese Art von Gut branchenüblich eingesetzt wird.
+Anweisungen zum Definieren der Kategorie:
+- Wenn die Beschreibung keine Anhaltspunkte für eine fundierte Interpretation bieten, dann gib die Kategorie "Unbekannt" wieder. 
+- Wenn ein Grundstoff identifiziert werden kann, dann füge dem Grundstoff den Zusatz "verarbeitet" oder "unverarbeitet" bei.
+- Wenn das Gut aus mehreren Grundstoffen besteht, dann gib die drei wahrscheinlichsten Grundstoffe mit ihrem prozentualem Anteil in der Materialzusammensetzung an. Es ist auch möglich, dass es zu 100% aus einem Grundstoff besteht. Wenn nichts davon anwendbar ist, gib "nicht anwendbar" wieder.
+
+Es handelt sich um das folgende Unternehmen:
+{Unternehmenskontext}
+
+Antworte in folgendem Output Format:
+{output_format}
+
+Bezeichnung:
+"{Bezeichnung}"[/INST]
+Output:
+{primer}
