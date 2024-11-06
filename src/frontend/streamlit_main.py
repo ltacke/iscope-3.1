@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+import time
 
 from backend.services.explainer import ExplainerCreator
 
@@ -28,21 +29,23 @@ with st.form("client_context"):
     uploaded_file = st.file_uploader("Hier die Liste der Items hochladen.", type="xlsx")
     submitted = st.form_submit_button("☑️ Submit")
 
-st.subheader("", divider="rainbow")
-
-
 if submitted:
     st.subheader("Dein Input", anchor=False, divider="rainbow")
-
-    # Step 2: Read the CSV file
     workload = pd.read_excel(uploaded_file)
-    st.write("### Hochgeladene Daten:")
     st.write(workload)
+
+    start_time = time.time()
 
     creator = ExplainerCreator(workload, "prompt.txt", context=client_context)
     results = creator.get_results()
 
-    # Step 3: Convert the DataFrame to an Excel file
+    end_time = time.time()
+    time_taken = end_time - start_time
+
+    st.write(
+        f"Verarbeitungszeit: {time_taken:.2f} Sekunden für {len(workload)-1} Einträge"
+    )
+
     output = BytesIO()
     with pd.ExcelWriter(output, engine="xlsxwriter") as writer:
         results.to_excel(writer, index=False, sheet_name="Sheet1")
@@ -50,9 +53,7 @@ if submitted:
     st.write("### Verarbeitete Daten:")
     st.dataframe(results)
 
-    processed_data = output.getvalue()  # Get the content of the BytesIO object
-
-    # Step 4: Add a Download Button for the Excel file
+    processed_data = output.getvalue()
     st.download_button(
         label="Ergebnisse als Excel herunterladen",
         data=processed_data,

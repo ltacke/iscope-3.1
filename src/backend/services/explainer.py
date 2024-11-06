@@ -2,6 +2,8 @@ import json
 import pandas as pd
 from pathlib import Path
 import os
+import concurrent.futures
+
 
 from backend.services.watsonx import Watsonx
 
@@ -62,12 +64,21 @@ class ExplainerCreator:
 
     def get_results(self):
         if self.workload.shape[1] == 1:
-            for index, entry in self.workload.iterrows():
+
+            def process_row(index, entry):
                 response = self.explainerllm._get_result(
                     self.prompt_file, self.context, entry.values
                 )
                 for key, value in response.items():
                     self.workload.loc[index, key] = value
+
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                futures = []
+                for index, entry in self.workload.iterrows():
+                    futures.append(executor.submit(process_row, index, entry))
+
+                concurrent.futures.wait(futures)
+
             return self.workload
         else:
-            return SyntaxError
+            return SyntaxError("Invalid workload shape")
