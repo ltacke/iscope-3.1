@@ -4,7 +4,6 @@ from pathlib import Path
 import os
 import concurrent.futures
 
-
 from backend.services.watsonx import Watsonx
 
 TEMPLATE_PATH = Path(__file__).parents[1] / "prompts"

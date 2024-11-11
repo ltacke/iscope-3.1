@@ -1,0 +1,27 @@
+cookie:
+  expiry_days: 30
+  key: some_signature_key # Must be a string
+  name: user_login_cookie
+credentials:
+  usernames:
+    admin:
+      email: admin@email.com
+      failed_login_attempts: 0 # Will be managed automatically
+      first_name: Super
+      last_name: Admin
+      logged_in: False # Will be managed automatically
+      password: ichangedthis # Will be hashed automatically
+      roles: # Optional
+        - admin
+        - editor
+        - viewer
+    user:
+      email: user@email.com
+      failed_login_attempts: 0 # Will be managed automatically
+      first_name: User
+      last_name: Account
+      logged_in: False # Will be managed automatically
+      password: passw0rd # Will be hashed automatically
+      roles: # Optional
+        - viewer
+        - editor

@@ -11,6 +11,8 @@ dependencies = [
     "ipykernel>=6.29.5",
     "openpyxl>=3.1.5",
     "python-dotenv>=1.0.1",
+    "pyyaml>=6.0.2",
+    "streamlit-authenticator>=0.4.1",
     "streamlit>=1.39.0",
     "xlsxwriter>=3.2.0",
 ]
