@@ -21,8 +21,6 @@ ENV VIRTUAL_ENV=/src/.venv \
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 ADD --chown=1001:0 src src
-# ADD --chown=1001:0 frontend frontend
-# ADD --chown=1001:0 .streamlit .streamlit
 
 EXPOSE 4000
 
